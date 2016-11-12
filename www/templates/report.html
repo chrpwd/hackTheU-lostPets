@@ -3,12 +3,15 @@
     <div id="report">
         <form>
             <label class="item item-input">
-                <span class="input-label">Kind of animal</span>
-                <input type="text" placeholder="Animal">
+                <span class="input-label">Animal</span>
+                <select name="animal" ng-model="pet.animal">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+        </select>
             </label>
             <label class="item item-input">
                 <span class="input-label"> Primary Color</span>
-                <select name="colors">
+                <select name="colors" ng-model="pet.primaryColor">
   					<option value="Black">Black</option>
   					<option value="White">White</option>
   					<option value="Brown">Brown</option>
@@ -19,7 +22,7 @@
             </label>
             <label class="item item-input">
                 <span class="input-label"> Secondary Color</span>
-                <select name="colors">
+                <select name="colors" ng-model="pet.secondaryColor">
   					<option value="Black">Black</option>
   					<option value="White">White</option>
   					<option value="Brown">Brown</option>
@@ -29,9 +32,13 @@
   					<option value="None">None</option>
 				</select>
             </label>
-            <label class="item item-input">
+             <label class="item item-input">
                 <span class="input-label">Size</span>
-                <input type="text" placeholder="Size">
+                <select name="size" ng-model="pet.size">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+        </select>
             </label>
         </form>
         <button class="button button-balanced button-block">Report</button>
