@@ -30,7 +30,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
         .state('report', {
             url: '/',
             templateUrl: 'templates/report.html',
-            controller: 'MapCtrl'
+            controller: 'reportCtrl'
+        })
+        .state('search', {
+            url: '/',
+            templateUrl: 'templates/search.html',
+            controller: 'searchCtrl'
         });
 
         $urlRouterProvider.otherwise("/");
@@ -45,9 +50,11 @@ angular.module('starter', ['ionic', 'ngCordova'])
         $scope.goToreport = function() {
             $state.go("report");
         }
-        $scope.goTomap = function() {
-            $state.go("map");
+
+         $scope.goTosearch = function() {
+            $state.go("search");
         }
+
 
         $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
@@ -86,6 +93,19 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
     })
     .controller('reportCtrl', function($scope, $state, $cordovaGeolocation) {
+
+
+        $scope.goTomap = function() {
+            $state.go("map");
+        }
+
+        $scope.goTosearch = function() {
+            $state.go("search");
+        }
+
+    })
+
+    .controller('searchCtrl', function($scope, $state, $cordovaGeolocation) {
 
         $scope.goToreport = function() {
             $state.go("report");

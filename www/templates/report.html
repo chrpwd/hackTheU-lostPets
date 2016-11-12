@@ -1,12 +1,47 @@
-<ion-view>
-	<ion-content>
-	    <div id="map" data-tap-disabled="true"></div>
-	    <ion-footer-bar>
+<ion-view title="Report a Pet">
+    <ion-content padding="true" class="has-header has-footer">
+    <div id="report">
+        <form>
+            <label class="item item-input">
+                <span class="input-label">Kind of animal</span>
+                <input type="text" placeholder="Animal">
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Primary Color</span>
+                <select name="colors">
+  					<option value="Black">Black</option>
+  					<option value="White">White</option>
+  					<option value="Brown">Brown</option>
+  					<option value="Gold">Gold</option>
+  					<option value="Orange">Orange</option>
+  					<option value="Gray">Gray</option>
+				</select>
+            </label>
+            <label class="item item-input">
+                <span class="input-label"> Secondary Color</span>
+                <select name="colors">
+  					<option value="Black">Black</option>
+  					<option value="White">White</option>
+  					<option value="Brown">Brown</option>
+  					<option value="Gold">Gold</option>
+  					<option value="Orange">Orange</option>
+  					<option value="Gray">Gray</option>
+  					<option value="None">None</option>
+				</select>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Size</span>
+                <input type="text" placeholder="Size">
+            </label>
+        </form>
+        <button class="button button-balanced button-block">Report</button>
+        </div>
+        <ion-footer-bar>
 	     <ion-tabs class="tabs-icon-only tabs-stable">
-    <a class="button icon-left ion-map" ng-click="goTomap()">Go to Map</a>
-    <a class="button icon-left ion-search">Find a Pet</a>
-    <a class="button icon-left ion-compass">Report a Lost Pet</a>
+    <a class="button-small icon-left ion-map" ng-click="goTomap()">Go to Map</a>
+    <a class="button-small icon-left ion-search"ng-click="goTosearch()">Find a Pet</a>
+    <a class="button-small icon-left ion-compass">Report a Lost Pet</a>
     </ion-tabs>
 </ion-footer-bar>
-	</ion-content>
+    </ion-content>
 </ion-view>
