@@ -99,6 +99,14 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
                             animation: google.maps.Animation.DROP,
                             position: latLng
                         });
+                        var infoWindow = new google.maps.InfoWindow({
+                    content: user.animal + ' ' + user.primaryColor + '/' + user.secondaryColor + ' ' + user.size
+                });
+
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infoWindow.open($scope.map, marker);
+                });
                     })
                 })
 
