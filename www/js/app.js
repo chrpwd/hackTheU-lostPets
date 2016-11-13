@@ -41,7 +41,7 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
         $urlRouterProvider.otherwise("/");
 
     })
-    .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+    .controller('MapCtrl', function($scope, $state, $cordovaGeolocation, myLocation) {
         var options = {
             timeout: 10000,
             enableHighAccuracy: true
@@ -59,7 +59,10 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
         $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
+            myLocation.setPos({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
             var mapOptions = {
                 center: latLng,
                 zoom: 15,
@@ -81,6 +84,7 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
                     content: "Here I am!"
                 });
 
+
                 google.maps.event.addListener(marker, 'click', function() {
                     infoWindow.open($scope.map, marker);
                 });
@@ -92,17 +96,34 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
         })
 
     })
-    .controller('reportCtrl', function($scope, $state, $firebaseArray) {
-        
-$scope.pet = {
-    secondaryColor: 'Black',
-    primaryColor: 'White',
-    size:'Small',
-    animal:'Dog'
-}
-        var list = $firebaseArray(firebase.database().ref());
+.service('myLocation', function(){
+    var position = {}
 
-        list.$add();
+    function setPos(p){
+        position = p;
+    }
+
+    function getPos(){
+        return position;
+    }
+
+    return {
+        setPos: setPos,
+        getPos: getPos
+    }
+})
+    .controller('reportCtrl', function($scope, $state, $firebaseArray, myLocation) {
+    
+        $scope.pet = {
+            secondaryColor: '',
+            primaryColor: '',
+            size: '',
+            animal: '',
+            position: myLocation.getPos()
+        };
+
+        var list = $firebaseArray(firebase.database().ref('list'));
+
 
         $scope.goTomap = function() {
             $state.go("map");
@@ -110,6 +131,11 @@ $scope.pet = {
 
         $scope.goTosearch = function() {
             $state.go("search");
+        }
+
+        $scope.save = function() {
+            list.$add($scope.pet);
+
         }
 
     })
