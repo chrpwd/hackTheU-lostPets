@@ -41,7 +41,7 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
         $urlRouterProvider.otherwise("/");
 
     })
-    .controller('MapCtrl', function($scope, $state, $cordovaGeolocation, myLocation) {
+    .controller('MapCtrl', function($scope, $state, $cordovaGeolocation, myLocation, $firebaseArray) {
         var options = {
             timeout: 10000,
             enableHighAccuracy: true
@@ -88,6 +88,19 @@ angular.module('starter', ['ionic', 'ngCordova','firebase'])
                 google.maps.event.addListener(marker, 'click', function() {
                     infoWindow.open($scope.map, marker);
                 });
+                var users = $firebaseArray(firebase.database().ref('list'));
+
+                users.$loaded().then(function() {
+                    angular.forEach(users, function(user) {
+                        console.log(user);
+                        var latLng = new google.maps.LatLng(user.position.lat, user.position.lng);
+                        var marker = new google.maps.Marker({
+                            map: $scope.map,
+                            animation: google.maps.Animation.DROP,
+                            position: latLng
+                        });
+                    })
+                })
 
             });
 
